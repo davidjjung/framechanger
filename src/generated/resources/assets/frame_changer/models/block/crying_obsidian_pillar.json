@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "frame_changer:block/crying_obsidian_pillar_top",
+    "side": "frame_changer:block/crying_obsidian_pillar"
+  }
+}

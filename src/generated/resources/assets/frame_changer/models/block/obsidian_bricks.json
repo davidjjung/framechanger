@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "frame_changer:block/obsidian_bricks"
+  }
+}

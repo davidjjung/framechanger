@@ -1,0 +1,27 @@
+{
+  "conditions": [
+    {
+      "modid": "create",
+      "type": "forge:mod_loaded"
+    },
+    {
+      "modid": "spelunkery",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "type": "create:emptying",
+  "ingredients": [
+    {
+      "item": "frame_changer:crying_chiseled_obsidian"
+    }
+  ],
+  "results": [
+    {
+      "item": "frame_changer:chiseled_obsidian"
+    },
+    {
+      "fluid": "spelunkery:portal_fluid",
+      "amount": 250
+    }
+  ]
+}
