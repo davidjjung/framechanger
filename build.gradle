@@ -80,7 +80,6 @@ dependencies {
     implementation fg.deobf("com.teamabnormals:blueprint:${project.minecraft}-${project.blueprint}")
 
     implementation fg.deobf("maven.modrinth:spelunkery:v6sHcul7")
-    implementation fg.deobf("maven.modrinth:create:Vfzp1Xaz")
     implementation fg.deobf("maven.modrinth:moonlight:1.19.2-2.3.4-forge")
     runtimeOnly fg.deobf("maven.modrinth:vt0VyseM:3NNRjDeC") // Architect's Palette
 
