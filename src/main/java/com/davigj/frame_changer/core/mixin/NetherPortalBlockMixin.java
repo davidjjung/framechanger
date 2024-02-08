@@ -8,6 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -50,7 +51,13 @@ public class NetherPortalBlockMixin {
                 if (cryState.hasProperty(AXIS)) {
                     convertedState.setValue(AXIS, cryState.getValue(AXIS));
                 }
-                level.setBlock(pos.relative(cryDir), convertedState, 3);
+                if (ModList.get().isLoaded("spelunkery")) {
+                    if (!(CommonConfigs.PORTAL_DESTRUCTION_CRYING_OBSIDIAN.get() && cryState.is(Blocks.OBSIDIAN))) {
+                        level.setBlock(pos.relative(cryDir), convertedState, 3);
+                    }
+                } else {
+                    level.setBlock(pos.relative(cryDir), convertedState, 3);
+                }
             }
         }
     }
