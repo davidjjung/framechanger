@@ -2,6 +2,7 @@ package com.davigj.frame_changer.core;
 
 import com.davigj.frame_changer.core.data.client.FCBlockStateProvider;
 import com.davigj.frame_changer.core.data.server.FCBlockTagsProvider;
+import com.davigj.frame_changer.core.data.server.FCLootTableProvider;
 import com.davigj.frame_changer.core.data.server.FCRecipeProvider;
 import com.teamabnormals.autumnity.core.data.server.AutumnityRecipeProvider;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
@@ -58,7 +59,8 @@ public class FrameChanger {
         boolean includeServer = event.includeServer();
         FCBlockTagsProvider blockTags = new FCBlockTagsProvider(generator, helper);
         generator.addProvider(includeServer, blockTags);
-        generator.addProvider(includeServer, new FCRecipeProvider(generator));
+//        generator.addProvider(includeServer, new FCRecipeProvider(generator));
+        generator.addProvider(includeServer, new FCLootTableProvider(generator));
 
         boolean includeClient = event.includeClient();
         generator.addProvider(includeClient, new FCBlockStateProvider(generator, helper));

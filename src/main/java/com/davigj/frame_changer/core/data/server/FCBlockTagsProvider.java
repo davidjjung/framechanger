@@ -31,5 +31,28 @@ public class FCBlockTagsProvider extends BlockTagsProvider {
                 FCBlocks.CRYING_POLISHED_OBSIDIAN_WALL.get(),
                 FCBlocks.OBSIDIAN_BRICK_WALL.get()
         );
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                FCBlocks.OBSIDIAN_BRICKS.get(),
+                FCBlocks.OBSIDIAN_BRICK_SLAB.get(),
+                FCBlocks.OBSIDIAN_BRICK_STAIRS.get(),
+                FCBlocks.OBSIDIAN_BRICK_WALL.get(),
+                FCBlocks.CRYING_OBSIDIAN_BRICKS.get(),
+                FCBlocks.CRYING_OBSIDIAN_BRICK_SLAB.get(),
+                FCBlocks.CRYING_OBSIDIAN_BRICK_STAIRS.get(),
+                FCBlocks.CRYING_OBSIDIAN_BRICK_WALL.get(),
+                FCBlocks.POLISHED_OBSIDIAN.get(),
+                FCBlocks.POLISHED_OBSIDIAN_SLAB.get(),
+                FCBlocks.POLISHED_OBSIDIAN_STAIRS.get(),
+                FCBlocks.POLISHED_OBSIDIAN_WALL.get(),
+                FCBlocks.CRYING_POLISHED_OBSIDIAN.get(),
+                FCBlocks.CRYING_POLISHED_OBSIDIAN_SLAB.get(),
+                FCBlocks.CRYING_POLISHED_OBSIDIAN_STAIRS.get(),
+                FCBlocks.CRYING_POLISHED_OBSIDIAN_WALL.get(),
+                FCBlocks.OBSIDIAN_PILLAR.get(),
+                FCBlocks.CRYING_OBSIDIAN_PILLAR.get(),
+                FCBlocks.CHISELED_OBSIDIAN.get(),
+                FCBlocks.CRYING_CHISELED_OBSIDIAN.get()
+        );
+
     }
 }

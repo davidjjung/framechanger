@@ -41,7 +41,9 @@ public class FCBlockStateProvider extends BlockStateProvider {
         this.wall(wall, parent);
     }
     public void block(Block block) {
+        // this uses vanilla datagen to make the blockstate and block model files
         this.simpleBlock(block, this.cubeAll(block));
+        // this generates the item model
         this.blockItem(block);
     }
 
