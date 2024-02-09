@@ -11,12 +11,10 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.portal.PortalShape;
 import net.minecraftforge.fml.ModList;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,8 +22,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(NetherPortalBlock.class)
 public class NetherPortalBlockMixin {
-    @Shadow @Final public static EnumProperty<Direction.Axis> AXIS;
-
     @Inject(method = "updateShape", at = @At("HEAD"))
     private void updateObby(BlockState state, Direction dir, BlockState nextState, LevelAccessor level, BlockPos pos, BlockPos nextPos, CallbackInfoReturnable<BlockState> cir) {
         if (!level.isClientSide()) {
@@ -48,15 +44,16 @@ public class NetherPortalBlockMixin {
             BlockState cryState = level.getBlockState(pos.relative(cryDir));
             if (random.nextDouble() < cryChance && FCConstants.OBBY_MAP.containsKey(cryState.getBlock()) && !(new PortalShape(level, pos, axis2)).isComplete()) {
                 BlockState convertedState = FCConstants.OBBY_MAP.get(cryState.getBlock()).defaultBlockState();
-                if (cryState.hasProperty(AXIS)) {
-                    convertedState.setValue(AXIS, cryState.getValue(AXIS));
+                if (cryState.hasProperty(BlockStateProperties.AXIS)) {
+                    convertedState.setValue(BlockStateProperties.AXIS, cryState.getValue(BlockStateProperties.AXIS));
                 }
                 if (ModList.get().isLoaded("spelunkery")) {
                     if (!(CommonConfigs.PORTAL_DESTRUCTION_CRYING_OBSIDIAN.get() && cryState.is(Blocks.OBSIDIAN))) {
                         level.setBlock(pos.relative(cryDir), convertedState, 3);
                     }
                 } else {
-                    level.setBlock(pos.relative(cryDir), convertedState, 3);
+                    level.setBlock(pos, cryState.hasProperty(BlockStateProperties.AXIS) ?
+                            convertedState.setValue(BlockStateProperties.AXIS, cryState.getValue(BlockStateProperties.AXIS)) : convertedState, 3);
                 }
             }
         }

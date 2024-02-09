@@ -25,5 +25,11 @@ public class FCBlockTagsProvider extends BlockTagsProvider {
                 FCBlocks.CHISELED_OBSIDIAN.get(),
                 Blocks.OBSIDIAN
         );
+        this.tag(BlockTags.WALLS).add(
+                FCBlocks.CRYING_OBSIDIAN_BRICK_WALL.get(),
+                FCBlocks.POLISHED_OBSIDIAN_WALL.get(),
+                FCBlocks.CRYING_POLISHED_OBSIDIAN_WALL.get(),
+                FCBlocks.OBSIDIAN_BRICK_WALL.get()
+        );
     }
 }

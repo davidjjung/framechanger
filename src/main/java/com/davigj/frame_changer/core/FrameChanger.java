@@ -2,6 +2,8 @@ package com.davigj.frame_changer.core;
 
 import com.davigj.frame_changer.core.data.client.FCBlockStateProvider;
 import com.davigj.frame_changer.core.data.server.FCBlockTagsProvider;
+import com.davigj.frame_changer.core.data.server.FCRecipeProvider;
+import com.teamabnormals.autumnity.core.data.server.AutumnityRecipeProvider;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.MinecraftForge;
@@ -15,8 +17,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import static com.davigj.frame_changer.core.other.FCConstants.determineChiselMap;
-import static com.davigj.frame_changer.core.other.FCConstants.initializeObbyMap;
+import static com.davigj.frame_changer.core.other.FCConstants.*;
 
 @Mod(FrameChanger.MOD_ID)
 public class FrameChanger {
@@ -40,6 +41,7 @@ public class FrameChanger {
         event.enqueueWork(() -> {
             initializeObbyMap();
             determineChiselMap();
+            portalFluidMap();
         });
     }
 
@@ -56,6 +58,7 @@ public class FrameChanger {
         boolean includeServer = event.includeServer();
         FCBlockTagsProvider blockTags = new FCBlockTagsProvider(generator, helper);
         generator.addProvider(includeServer, blockTags);
+        generator.addProvider(includeServer, new FCRecipeProvider(generator));
 
         boolean includeClient = event.includeClient();
         generator.addProvider(includeClient, new FCBlockStateProvider(generator, helper));

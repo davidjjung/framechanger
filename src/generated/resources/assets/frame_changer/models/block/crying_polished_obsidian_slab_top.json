@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "frame_changer:block/crying_polished_obsidian",
+    "side": "frame_changer:block/crying_polished_obsidian",
+    "top": "frame_changer:block/crying_polished_obsidian"
+  }
+}

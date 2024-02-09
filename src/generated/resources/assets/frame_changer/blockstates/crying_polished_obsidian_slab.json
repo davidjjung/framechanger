@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "frame_changer:block/crying_polished_obsidian_slab"
+    },
+    "type=double": {
+      "model": "frame_changer:block/crying_polished_obsidian"
+    },
+    "type=top": {
+      "model": "frame_changer:block/crying_polished_obsidian_slab_top"
+    }
+  }
+}

@@ -3,11 +3,13 @@ package com.davigj.frame_changer.core.data.client;
 import com.davigj.frame_changer.core.FrameChanger;
 import com.davigj.frame_changer.core.registry.FCBlocks;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Objects;
 
 public class FCBlockStateProvider extends BlockStateProvider {
     public FCBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
@@ -20,12 +22,24 @@ public class FCBlockStateProvider extends BlockStateProvider {
         this.pillarBlock(FCBlocks.CRYING_OBSIDIAN_PILLAR.get());
         this.block(FCBlocks.CHISELED_OBSIDIAN.get());
         this.block(FCBlocks.CRYING_CHISELED_OBSIDIAN.get());
-        this.block(FCBlocks.OBSIDIAN_BRICKS.get());
-        this.block(FCBlocks.CRYING_OBSIDIAN_BRICKS.get());
-        this.block(FCBlocks.POLISHED_OBSIDIAN.get());
-        this.block(FCBlocks.CRYING_POLISHED_OBSIDIAN.get());
+
+        this.groupSSW(FCBlocks.OBSIDIAN_BRICKS.get(), FCBlocks.OBSIDIAN_BRICK_STAIRS.get(),
+                FCBlocks.OBSIDIAN_BRICK_SLAB.get(), FCBlocks.OBSIDIAN_BRICK_WALL.get());
+        this.groupSSW(FCBlocks.CRYING_OBSIDIAN_BRICKS.get(), FCBlocks.CRYING_OBSIDIAN_BRICK_STAIRS.get(),
+                FCBlocks.CRYING_OBSIDIAN_BRICK_SLAB.get(), FCBlocks.CRYING_OBSIDIAN_BRICK_WALL.get());
+
+        this.groupSSW(FCBlocks.POLISHED_OBSIDIAN.get(), FCBlocks.POLISHED_OBSIDIAN_STAIRS.get(),
+                FCBlocks.POLISHED_OBSIDIAN_SLAB.get(), FCBlocks.POLISHED_OBSIDIAN_WALL.get());
+        this.groupSSW(FCBlocks.CRYING_POLISHED_OBSIDIAN.get(), FCBlocks.CRYING_POLISHED_OBSIDIAN_STAIRS.get(),
+                FCBlocks.CRYING_POLISHED_OBSIDIAN_SLAB.get(), FCBlocks.CRYING_POLISHED_OBSIDIAN_WALL.get());
     }
 
+    public void groupSSW(Block parent, Block stairs, Block slab, Block wall) {
+        this.block(parent);
+        this.stairs(stairs, parent);
+        this.slab(slab, parent);
+        this.wall(wall, parent);
+    }
     public void block(Block block) {
         this.simpleBlock(block, this.cubeAll(block));
         this.blockItem(block);
@@ -36,7 +50,24 @@ public class FCBlockStateProvider extends BlockStateProvider {
         this.blockItem(pillar);
     }
 
+    public void stairs(Block stairs, Block parent) {
+        this.stairsBlock((StairBlock) stairs, blockTexture(parent));
+        this.blockItem(stairs);
+    }
+    public void slab(Block slab, Block parent) {
+        this.slabBlock((SlabBlock) slab, blockTexture(parent), blockTexture(parent));
+        this.blockItem(slab);
+    }
+    public void wall(Block wall, Block parent) {
+        this.wallBlock((WallBlock) wall, blockTexture(parent));
+        this.itemModels().getBuilder(name(wall)).parent(this.models().wallInventory(name(wall) + "_inventory", blockTexture(parent)));
+    }
+
     public void blockItem(Block block) {
         this.simpleBlockItem(block, new ModelFile.ExistingModelFile(this.blockTexture(block), this.models().existingFileHelper));
+    }
+
+    private String name(Block block) {
+        return Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block)).getPath();
     }
 }
