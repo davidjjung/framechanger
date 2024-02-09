@@ -44,12 +44,10 @@ public class NetherPortalBlockMixin {
             BlockState cryState = level.getBlockState(pos.relative(cryDir));
             if (random.nextDouble() < cryChance && FCConstants.OBBY_MAP.containsKey(cryState.getBlock()) && !(new PortalShape(level, pos, axis2)).isComplete()) {
                 BlockState convertedState = FCConstants.OBBY_MAP.get(cryState.getBlock()).defaultBlockState();
-                if (cryState.hasProperty(BlockStateProperties.AXIS)) {
-                    convertedState.setValue(BlockStateProperties.AXIS, cryState.getValue(BlockStateProperties.AXIS));
-                }
                 if (ModList.get().isLoaded("spelunkery")) {
                     if (!(CommonConfigs.PORTAL_DESTRUCTION_CRYING_OBSIDIAN.get() && cryState.is(Blocks.OBSIDIAN))) {
-                        level.setBlock(pos.relative(cryDir), convertedState, 3);
+                        level.setBlock(pos, cryState.hasProperty(BlockStateProperties.AXIS) ?
+                                convertedState.setValue(BlockStateProperties.AXIS, cryState.getValue(BlockStateProperties.AXIS)) : convertedState, 3);
                     }
                 } else {
                     level.setBlock(pos, cryState.hasProperty(BlockStateProperties.AXIS) ?
