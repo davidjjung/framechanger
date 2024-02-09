@@ -59,7 +59,7 @@ public class FrameChanger {
         boolean includeServer = event.includeServer();
         FCBlockTagsProvider blockTags = new FCBlockTagsProvider(generator, helper);
         generator.addProvider(includeServer, blockTags);
-//        generator.addProvider(includeServer, new FCRecipeProvider(generator));
+        generator.addProvider(includeServer, new FCRecipeProvider(generator));
         generator.addProvider(includeServer, new FCLootTableProvider(generator));
 
         boolean includeClient = event.includeClient();
