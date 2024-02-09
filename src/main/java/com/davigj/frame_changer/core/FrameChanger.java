@@ -4,7 +4,6 @@ import com.davigj.frame_changer.core.data.client.FCBlockStateProvider;
 import com.davigj.frame_changer.core.data.server.FCBlockTagsProvider;
 import com.davigj.frame_changer.core.data.server.FCLootTableProvider;
 import com.davigj.frame_changer.core.data.server.FCRecipeProvider;
-import com.teamabnormals.autumnity.core.data.server.AutumnityRecipeProvider;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.MinecraftForge;
