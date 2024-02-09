@@ -1,8 +1,10 @@
 package com.davigj.frame_changer.core.other;
 
 import com.davigj.frame_changer.core.registry.FCBlocks;
+import com.ordana.spelunkery.configs.CommonConfigs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.fml.ModList;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +13,7 @@ public class FCConstants {
     public static final Map<Block, Block> OBBY_MAP = new HashMap<>();
     public static final Map<Block, Block> CHISEL_MAP = new HashMap<>();
     public static final Map<Block, Block> PORTAL_FLUID_MAP = new HashMap<>();
+    public static final boolean spelunkeryCryingPortals;
 
 
     public static void initializeObbyMap() {
@@ -32,5 +35,9 @@ public class FCConstants {
         PORTAL_FLUID_MAP.put(FCBlocks.CRYING_OBSIDIAN_PILLAR.get(), FCBlocks.OBSIDIAN_PILLAR.get());
         PORTAL_FLUID_MAP.put(FCBlocks.CRYING_CHISELED_OBSIDIAN.get(), FCBlocks.CHISELED_OBSIDIAN.get());
         PORTAL_FLUID_MAP.put(FCBlocks.CRYING_POLISHED_OBSIDIAN.get(), FCBlocks.POLISHED_OBSIDIAN.get());
+    }
+
+    static {
+        spelunkeryCryingPortals = ModList.get().isLoaded("spelunkery") ? CommonConfigs.PORTAL_DESTRUCTION_CRYING_OBSIDIAN.get() : false;
     }
 }

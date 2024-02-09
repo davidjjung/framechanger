@@ -2,7 +2,6 @@ package com.davigj.frame_changer.core.mixin;
 
 import com.davigj.frame_changer.core.FCConfig;
 import com.davigj.frame_changer.core.other.FCConstants;
-import com.ordana.spelunkery.configs.CommonConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -20,13 +19,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static com.davigj.frame_changer.core.other.FCConstants.spelunkeryCryingPortals;
+
 @Mixin(NetherPortalBlock.class)
 public class NetherPortalBlockMixin {
     @Inject(method = "updateShape", at = @At("HEAD"))
     private void updateObby(BlockState state, Direction dir, BlockState nextState, LevelAccessor level, BlockPos pos, BlockPos nextPos, CallbackInfoReturnable<BlockState> cir) {
         if (!level.isClientSide()) {
             if (ModList.get().isLoaded("spelunkery")) {
-                if (CommonConfigs.PORTAL_DESTRUCTION_CRYING_OBSIDIAN.get()) {
+                if (spelunkeryCryingPortals) {
                     framechanger$fluidSpread(state, (Level) level, pos, 0.33D);
                 }
             } else if (FCConfig.COMMON.contagiousMisery.get()) {
@@ -45,7 +46,7 @@ public class NetherPortalBlockMixin {
             if (random.nextDouble() < cryChance && FCConstants.OBBY_MAP.containsKey(cryState.getBlock()) && !(new PortalShape(level, pos, axis2)).isComplete()) {
                 BlockState convertedState = FCConstants.OBBY_MAP.get(cryState.getBlock()).defaultBlockState();
                 if (ModList.get().isLoaded("spelunkery")) {
-                    if (!(CommonConfigs.PORTAL_DESTRUCTION_CRYING_OBSIDIAN.get() && cryState.is(Blocks.OBSIDIAN))) {
+                    if (!(spelunkeryCryingPortals && cryState.is(Blocks.OBSIDIAN))) {
                         level.setBlock(pos.relative(cryDir), cryState.hasProperty(BlockStateProperties.AXIS) ?
                                 convertedState.setValue(BlockStateProperties.AXIS, cryState.getValue(BlockStateProperties.AXIS)) : convertedState, 3);
                     }
