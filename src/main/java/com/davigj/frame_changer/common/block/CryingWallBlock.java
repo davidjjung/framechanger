@@ -33,7 +33,7 @@ public class CryingWallBlock extends WallBlock {
 
                     p_221056_.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR,
                             (double) p_221057_.getX() + d0 - offsetX + 0.35,
-                            (double) p_221057_.getY() + d1 - offsetY + 1.5,
+                            (double) p_221057_.getY() + d1 - offsetY + 1.35,
                             (double) p_221057_.getZ() + d2 - offsetZ + 0.35,
                             0.0D, 0.0D, 0.0D);
                 }
