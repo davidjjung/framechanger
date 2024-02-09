@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "frame_changer:crying_obsidian_bricks"
+  },
+  "result": "frame_changer:crying_obsidian_brick_slab"
+}

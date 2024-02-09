@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "frame_changer:crying_polished_obsidian"
+  },
+  "result": "frame_changer:crying_polished_obsidian_stairs"
+}

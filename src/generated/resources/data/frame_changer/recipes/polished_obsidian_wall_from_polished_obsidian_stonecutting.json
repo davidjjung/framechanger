@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "frame_changer:polished_obsidian"
+  },
+  "result": "frame_changer:polished_obsidian_wall"
+}
