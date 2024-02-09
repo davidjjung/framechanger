@@ -46,11 +46,11 @@ public class NetherPortalBlockMixin {
                 BlockState convertedState = FCConstants.OBBY_MAP.get(cryState.getBlock()).defaultBlockState();
                 if (ModList.get().isLoaded("spelunkery")) {
                     if (!(CommonConfigs.PORTAL_DESTRUCTION_CRYING_OBSIDIAN.get() && cryState.is(Blocks.OBSIDIAN))) {
-                        level.setBlock(pos, cryState.hasProperty(BlockStateProperties.AXIS) ?
+                        level.setBlock(pos.relative(cryDir), cryState.hasProperty(BlockStateProperties.AXIS) ?
                                 convertedState.setValue(BlockStateProperties.AXIS, cryState.getValue(BlockStateProperties.AXIS)) : convertedState, 3);
                     }
                 } else {
-                    level.setBlock(pos, cryState.hasProperty(BlockStateProperties.AXIS) ?
+                    level.setBlock(pos.relative(cryDir), cryState.hasProperty(BlockStateProperties.AXIS) ?
                             convertedState.setValue(BlockStateProperties.AXIS, cryState.getValue(BlockStateProperties.AXIS)) : convertedState, 3);
                 }
             }
