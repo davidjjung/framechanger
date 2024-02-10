@@ -35,9 +35,8 @@ public class FCEvents {
         ItemStack heldItem = player.getItemInHand(event.getHand());
         BlockState clickedBlockState = player.level.getBlockState(event.getPos());
         if (PORTAL_FLUID_MAP.containsKey(clickedBlockState.getBlock()) && heldItem.is(Items.GLASS_BOTTLE)) {
-            BlockState convertedState = FCConstants.PORTAL_FLUID_MAP.get(clickedBlockState.getBlock()).defaultBlockState();
-            player.level.setBlock(event.getPos(), clickedBlockState.hasProperty(BlockStateProperties.AXIS) ?
-                    convertedState.setValue(BlockStateProperties.AXIS, clickedBlockState.getValue(BlockStateProperties.AXIS)) : convertedState, 3);
+            BlockState convertedState = FCConstants.PORTAL_FLUID_MAP.get(clickedBlockState.getBlock()).withPropertiesOf(clickedBlockState);
+            player.level.setBlock(event.getPos(), convertedState, 3);
             player.swing(event.getHand());
             event.setCancellationResult(InteractionResult.SUCCESS);
             ItemStack portalFluid = new ItemStack(ModItems.PORTAL_FLUID_BOTTLE.get());

@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static com.davigj.frame_changer.core.other.FCConstants.OBBY_MAP;
 import static com.davigj.frame_changer.core.other.FCConstants.spelunkeryCryingPortals;
 
 @Mixin(NetherPortalBlock.class)
@@ -43,16 +44,14 @@ public class NetherPortalBlockMixin {
         RandomSource random = level.getRandom();
         for (Direction cryDir : Direction.values()) {
             BlockState cryState = level.getBlockState(pos.relative(cryDir));
-            if (random.nextDouble() < cryChance && FCConstants.OBBY_MAP.containsKey(cryState.getBlock()) && !(new PortalShape(level, pos, axis2)).isComplete()) {
-                BlockState convertedState = FCConstants.OBBY_MAP.get(cryState.getBlock()).defaultBlockState();
+            if (random.nextDouble() < cryChance && OBBY_MAP.containsKey(cryState.getBlock()) && !(new PortalShape(level, pos, axis2)).isComplete()) {
+                BlockState convertedState = OBBY_MAP.get(cryState.getBlock()).withPropertiesOf(cryState);
                 if (ModList.get().isLoaded("spelunkery")) {
                     if (!(spelunkeryCryingPortals && cryState.is(Blocks.OBSIDIAN))) {
-                        level.setBlock(pos.relative(cryDir), cryState.hasProperty(BlockStateProperties.AXIS) ?
-                                convertedState.setValue(BlockStateProperties.AXIS, cryState.getValue(BlockStateProperties.AXIS)) : convertedState, 3);
+                        level.setBlock(pos.relative(cryDir), convertedState, 3);
                     }
                 } else {
-                    level.setBlock(pos.relative(cryDir), cryState.hasProperty(BlockStateProperties.AXIS) ?
-                            convertedState.setValue(BlockStateProperties.AXIS, cryState.getValue(BlockStateProperties.AXIS)) : convertedState, 3);
+                    level.setBlock(pos.relative(cryDir), convertedState, 3);
                 }
             }
         }
