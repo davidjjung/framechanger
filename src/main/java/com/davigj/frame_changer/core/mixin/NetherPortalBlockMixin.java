@@ -2,6 +2,7 @@ package com.davigj.frame_changer.core.mixin;
 
 import com.davigj.frame_changer.core.FCConfig;
 import com.davigj.frame_changer.core.other.FCConstants;
+import com.teamabnormals.blueprint.core.util.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -45,7 +46,7 @@ public class NetherPortalBlockMixin {
         for (Direction cryDir : Direction.values()) {
             BlockState cryState = level.getBlockState(pos.relative(cryDir));
             if (random.nextDouble() < cryChance && OBBY_MAP.containsKey(cryState.getBlock()) && !(new PortalShape(level, pos, axis2)).isComplete()) {
-                BlockState convertedState = OBBY_MAP.get(cryState.getBlock()).withPropertiesOf(cryState);
+                BlockState convertedState = BlockUtil.transferAllBlockStates(cryState, OBBY_MAP.get(cryState.getBlock()).defaultBlockState());
                 if (ModList.get().isLoaded("spelunkery")) {
                     if (!(spelunkeryCryingPortals && cryState.is(Blocks.OBSIDIAN))) {
                         level.setBlock(pos.relative(cryDir), convertedState, 3);

@@ -2,6 +2,7 @@ package com.davigj.frame_changer.core.other;
 
 import com.davigj.frame_changer.core.FrameChanger;
 import com.ordana.spelunkery.reg.ModItems;
+import com.teamabnormals.blueprint.core.util.BlockUtil;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -35,7 +36,7 @@ public class FCEvents {
         ItemStack heldItem = player.getItemInHand(event.getHand());
         BlockState clickedBlockState = player.level.getBlockState(event.getPos());
         if (PORTAL_FLUID_MAP.containsKey(clickedBlockState.getBlock()) && heldItem.is(Items.GLASS_BOTTLE)) {
-            BlockState convertedState = FCConstants.PORTAL_FLUID_MAP.get(clickedBlockState.getBlock()).withPropertiesOf(clickedBlockState);
+            BlockState convertedState = BlockUtil.transferAllBlockStates(clickedBlockState, PORTAL_FLUID_MAP.get(clickedBlockState.getBlock()).defaultBlockState());
             player.level.setBlock(event.getPos(), convertedState, 3);
             player.swing(event.getHand());
             event.setCancellationResult(InteractionResult.SUCCESS);
