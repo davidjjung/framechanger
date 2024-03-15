@@ -3,21 +3,25 @@ package com.davigj.frame_changer.core.data.server;
 import com.davigj.frame_changer.core.FrameChanger;
 import com.davigj.frame_changer.core.other.FCBlockTags;
 import com.davigj.frame_changer.core.registry.FCBlocks;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.PackOutput;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
-public class FCBlockTagsProvider extends BlockTagsProvider {
+import java.util.concurrent.CompletableFuture;
 
-    public FCBlockTagsProvider(DataGenerator p_126511_, @Nullable ExistingFileHelper existingFileHelper) {
-        super(p_126511_, FrameChanger.MOD_ID, existingFileHelper);
+public class FCBlockTagsProvider extends BlockTagsProvider {
+    public FCBlockTagsProvider(PackOutput output, CompletableFuture<Provider> provider, ExistingFileHelper helper) {
+        super(output, provider, FrameChanger.MOD_ID, helper);
     }
 
     @Override
-    public void addTags() {
+    public void addTags(HolderLookup.Provider provider) {
         this.tag(FCBlockTags.PORTAL_FRAMES).add(
                 FCBlocks.OBSIDIAN_BRICKS.get(),
                 FCBlocks.OBSIDIAN_PILLAR.get(),

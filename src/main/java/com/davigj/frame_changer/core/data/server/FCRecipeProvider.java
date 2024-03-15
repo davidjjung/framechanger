@@ -3,7 +3,7 @@ package com.davigj.frame_changer.core.data.server;
 import com.davigj.frame_changer.core.FrameChanger;
 import com.davigj.frame_changer.core.other.FCBlockFamilies;
 import com.davigj.frame_changer.core.registry.FCBlocks;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -17,11 +17,11 @@ import net.minecraft.world.level.block.Blocks;
 import java.util.function.Consumer;
 
 public class FCRecipeProvider extends RecipeProvider {
-    public FCRecipeProvider(DataGenerator p_125973_) {
-        super(p_125973_);
+    public FCRecipeProvider(PackOutput output) {
+        super(output);
     }
 
-    public void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+    public void buildRecipes(Consumer<FinishedRecipe> consumer) {
         generateRecipes(consumer, FCBlockFamilies.OBSIDIAN_BRICKS_FAMILY);
         generateRecipes(consumer, FCBlockFamilies.CRYING_OBSIDIAN_BRICKS_FAMILY);
         generateRecipes(consumer, FCBlockFamilies.POLISHED_OBSIDIAN_FAMILY);
@@ -74,7 +74,7 @@ public class FCRecipeProvider extends RecipeProvider {
         stonecutterResultFromBase(consumer, FCBlocks.CRYING_OBSIDIAN_BRICK_SLAB.get(), FCBlocks.CRYING_POLISHED_OBSIDIAN.get(), 2);
         stonecutterResultFromBase(consumer, FCBlocks.CRYING_OBSIDIAN_BRICK_STAIRS.get(), FCBlocks.CRYING_POLISHED_OBSIDIAN.get());
         stonecutterResultFromBase(consumer, FCBlocks.CRYING_OBSIDIAN_BRICK_WALL.get(), FCBlocks.CRYING_POLISHED_OBSIDIAN.get());
-
+        /*
         ShapedRecipeBuilder.shaped(FCBlocks.OBSIDIAN_PILLAR.get(), 2).define(
                 '#', Blocks.OBSIDIAN).pattern("#").pattern("#")
                 .unlockedBy("has_obsidian_block", has(Blocks.OBSIDIAN)).save(consumer);
@@ -95,7 +95,8 @@ public class FCRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(FCBlocks.CRYING_OBSIDIAN_BRICKS.get(), 4).define('#', FCBlocks.CRYING_POLISHED_OBSIDIAN.get())
                 .pattern("##").pattern("##")
                 .unlockedBy("has_crying_polished_obsidian", has(FCBlocks.CRYING_POLISHED_OBSIDIAN.get())).save(consumer);
-    }
+         */
+        }
 
     public static void stoneCutSlabStairsWall(Consumer<FinishedRecipe> consumer, Block parent, Block slab, Block stairs, Block wall) {
         stonecutterResultFromBase(consumer, (ItemLike)slab, (ItemLike)parent, 2);
@@ -108,9 +109,9 @@ public class FCRecipeProvider extends RecipeProvider {
     }
 
     public static void stonecutterResultFromBase(Consumer<FinishedRecipe> consumer, ItemLike output, ItemLike input, int count) {
-        SingleItemRecipeBuilder var10000 = SingleItemRecipeBuilder.stonecutting(Ingredient.of(new ItemLike[]{input}), output, count).unlockedBy(getHasName(input), has(input));
-        ResourceLocation var10002 = getModConversionRecipeName(output, input);
-        var10000.save(consumer, "" + var10002 + "_stonecutting");
+//        SingleItemRecipeBuilder var10000 = SingleItemRecipeBuilder.stonecutting(Ingredient.of(new ItemLike[]{input}), output, count).unlockedBy(getHasName(input), has(input));
+//        ResourceLocation var10002 = getModConversionRecipeName(output, input);
+//        var10000.save(consumer, "" + var10002 + "_stonecutting");
     }
 
     protected static ResourceLocation getModConversionRecipeName(ItemLike output, ItemLike input) {

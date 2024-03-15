@@ -3,6 +3,7 @@ package com.davigj.frame_changer.core.data.client;
 import com.davigj.frame_changer.core.FrameChanger;
 import com.davigj.frame_changer.core.registry.FCBlocks;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -12,8 +13,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.Objects;
 
 public class FCBlockStateProvider extends BlockStateProvider {
-    public FCBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, FrameChanger.MOD_ID, exFileHelper);
+    public FCBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
+        super(output, FrameChanger.MOD_ID, exFileHelper);
     }
 
     @Override

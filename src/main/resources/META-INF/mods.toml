@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[32,)"
+loaderVersion = "[47,)"
 issueTrackerURL = "https://github.com/davidjjung/framechanger/issues"
 license = "MIT License"
 
@@ -11,7 +11,7 @@ itemIcon = "frame_changer:obsidian_pillar"
 configBackground = "minecraft:textures/block/obsidian.png"
 authors = "DavigJ"
 credits = "Finneganso"
-displayURL = "https://github.com/davidjjung/framechanger"
+displayURL = "https://modrinth.com/mod/frame-changer"
 displayName = "Frame Changer"
 description = '''
     Adds some flexibility to Nether portal frames in the form of a block tag and other configurable features.
@@ -20,20 +20,20 @@ description = '''
 [[dependencies.frame_changer]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19.2,1.19.3)"
+versionRange = "[1.20.1,1.21)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.frame_changer]]
 modId = "forge"
 mandatory = true
-versionRange = "[43.3.0,)"
+versionRange = "[47.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.frame_changer]]
 modId = "blueprint"
 mandatory = true
-versionRange = "[6.2.0,)"
+versionRange = "[7.0.0,)"
 ordering = "AFTER"
 side = "BOTH"
