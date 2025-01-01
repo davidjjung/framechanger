@@ -79,8 +79,13 @@ dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
     implementation fg.deobf("com.teamabnormals:blueprint:${project.minecraft}-${project.blueprint}")
 
-    compileOnly fg.deobf("maven.modrinth:spelunkery:jkZktG9C")
-    compileOnly fg.deobf("maven.modrinth:moonlight:2O5fg0oB")
+    compileOnly fg.deobf("maven.modrinth:spelunkery:Pae622FR")
+    compileOnly fg.deobf("maven.modrinth:moonlight:uFOWAGzU")
+
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.0"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.0")) {
+        jarJar.ranged(it, "[0.4.0,)")
+    }
 
     compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}-common-api:${project.jei}")
     compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}-forge-api:${project.jei}")
