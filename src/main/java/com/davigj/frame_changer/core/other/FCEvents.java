@@ -13,15 +13,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import static com.davigj.frame_changer.core.other.FCConstants.PORTAL_FLUID_MAP;
 
-@Mod.EventBusSubscriber(modid = FrameChanger.MOD_ID)
+@EventBusSubscriber(modid = FrameChanger.MOD_ID)
 public class FCEvents {
     @SubscribeEvent
     public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
@@ -37,7 +36,7 @@ public class FCEvents {
             player.swing(event.getHand());
             event.setCancellationResult(InteractionResult.SUCCESS);
             ItemStack portalFluid = new ItemStack(ModItems.PORTAL_FLUID_BOTTLE.get());
-            player.level().playSound(player, event.getPos(), SoundEvents.RESPAWN_ANCHOR_DEPLETE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+            player.level().playSound(player, event.getPos(), SoundEvents.RESPAWN_ANCHOR_DEPLETE.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
             ParticleUtils.spawnParticlesOnBlockFaces(player.level(), event.getPos(), ParticleTypes.FALLING_OBSIDIAN_TEAR, UniformInt.of(3, 5));
             if (!player.getAbilities().instabuild) {
                 heldItem.shrink(1);

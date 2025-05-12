@@ -1,0 +1,27 @@
+{
+  "conditions": [
+    {
+      "modid": "create",
+      "type": "neoforge:mod_loaded"
+    },
+    {
+      "modid": "spelunkery",
+      "type": "neoforge:mod_loaded"
+    }
+  ],
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "frame_changer:obsidian_pillar"
+    },
+    {
+      "fluid": "spelunkery:portal_fluid",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "frame_changer:crying_obsidian_pillar"
+    }
+  ]
+}

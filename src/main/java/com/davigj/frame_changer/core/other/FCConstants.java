@@ -4,7 +4,7 @@ import com.davigj.frame_changer.core.registry.FCBlocks;
 import com.ordana.spelunkery.configs.CommonConfigs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 
 import java.util.HashMap;
 import java.util.Map;

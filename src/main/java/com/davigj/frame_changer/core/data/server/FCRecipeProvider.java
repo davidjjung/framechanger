@@ -1,31 +1,31 @@
 package com.davigj.frame_changer.core.data.server;
 
-import com.davigj.frame_changer.core.FrameChanger;
 import com.davigj.frame_changer.core.other.FCBlockFamilies;
 import com.davigj.frame_changer.core.registry.FCBlocks;
+import com.teamabnormals.blueprint.core.data.server.BlueprintRecipeProvider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
-public class FCRecipeProvider extends RecipeProvider {
-    public FCRecipeProvider(PackOutput output) {
-        super(output);
+import static com.davigj.frame_changer.core.FrameChanger.MOD_ID;
+
+public class FCRecipeProvider extends BlueprintRecipeProvider {
+    public FCRecipeProvider(PackOutput result, CompletableFuture<HolderLookup.Provider> provider) {
+        super(MOD_ID, result, provider);
     }
 
-    public void buildRecipes(Consumer<FinishedRecipe> consumer) {
-        generateRecipes(consumer, FCBlockFamilies.OBSIDIAN_BRICKS_FAMILY);
-        generateRecipes(consumer, FCBlockFamilies.CRYING_OBSIDIAN_BRICKS_FAMILY);
-        generateRecipes(consumer, FCBlockFamilies.POLISHED_OBSIDIAN_FAMILY);
-        generateRecipes(consumer, FCBlockFamilies.CRYING_POLISHED_OBSIDIAN_FAMILY);
+    protected void buildRecipes(RecipeOutput consumer, HolderLookup.Provider holderLookup) {
+        generateRecipes(consumer, FCBlockFamilies.OBSIDIAN_BRICKS_FAMILY, FeatureFlags.DEFAULT_FLAGS);
+        generateRecipes(consumer, FCBlockFamilies.CRYING_OBSIDIAN_BRICKS_FAMILY, FeatureFlags.DEFAULT_FLAGS);
+        generateRecipes(consumer, FCBlockFamilies.POLISHED_OBSIDIAN_FAMILY, FeatureFlags.DEFAULT_FLAGS);
+        generateRecipes(consumer, FCBlockFamilies.CRYING_POLISHED_OBSIDIAN_FAMILY, FeatureFlags.DEFAULT_FLAGS);
 
         stoneCutSlabStairsWall(consumer, FCBlocks.OBSIDIAN_BRICKS.get(), FCBlocks.OBSIDIAN_BRICK_SLAB.get(),
                 FCBlocks.OBSIDIAN_BRICK_STAIRS.get(), FCBlocks.OBSIDIAN_BRICK_WALL.get());
@@ -98,23 +98,23 @@ public class FCRecipeProvider extends RecipeProvider {
          */
         }
 
-    public static void stoneCutSlabStairsWall(Consumer<FinishedRecipe> consumer, Block parent, Block slab, Block stairs, Block wall) {
+    public static void stoneCutSlabStairsWall(RecipeOutput consumer, Block parent, Block slab, Block stairs, Block wall) {
         stonecutterResultFromBase(consumer, (ItemLike)slab, (ItemLike)parent, 2);
         stonecutterResultFromBase(consumer, (ItemLike)stairs, (ItemLike)parent);
         stonecutterResultFromBase(consumer, (ItemLike)wall, (ItemLike)parent);
     }
 
-    public static void stonecutterResultFromBase(Consumer<FinishedRecipe> consumer, ItemLike output, ItemLike input) {
+    public static void stonecutterResultFromBase(RecipeOutput consumer, ItemLike output, ItemLike input) {
         stonecutterResultFromBase(consumer, output, input, 1);
     }
 
-    public static void stonecutterResultFromBase(Consumer<FinishedRecipe> consumer, ItemLike output, ItemLike input, int count) {
+    public static void stonecutterResultFromBase(RecipeOutput consumer, ItemLike output, ItemLike input, int count) {
 //        SingleItemRecipeBuilder var10000 = SingleItemRecipeBuilder.stonecutting(Ingredient.of(new ItemLike[]{input}), output, count).unlockedBy(getHasName(input), has(input));
 //        ResourceLocation var10002 = getModConversionRecipeName(output, input);
 //        var10000.save(consumer, "" + var10002 + "_stonecutting");
     }
 
-    protected static ResourceLocation getModConversionRecipeName(ItemLike output, ItemLike input) {
-        return new ResourceLocation(FrameChanger.MOD_ID, getConversionRecipeName(output, input));
+    public ResourceLocation getModConversionRecipeName(ItemLike output, ItemLike input) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, getConversionRecipeName(output, input));
     }
 }

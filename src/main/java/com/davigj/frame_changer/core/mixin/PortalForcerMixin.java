@@ -6,14 +6,14 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.portal.PortalForcer;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.fml.ModList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.*;
@@ -68,12 +68,12 @@ public class PortalForcerMixin {
             return () -> Blocks.OBSIDIAN;
         }
         assert modid != null;
-        ResourceLocation block = new ResourceLocation(modid, blockID);
-        if (ForgeRegistries.BLOCKS.getValue(block) == Blocks.AIR) {
+        ResourceLocation block = ResourceLocation.fromNamespaceAndPath(modid, blockID);
+        if (BuiltInRegistries.BLOCK.get(block) == Blocks.AIR) {
             framechanger$LOGGER.warn("Invalid configured exit portal frame blockID. String should be formatted 'modID:blockID'. Defaulting to minecraft:obsidian");
             return () -> Blocks.OBSIDIAN;
         }
-        return (ModList.get().isLoaded(modid) ? () -> ForgeRegistries.BLOCKS.getValue(block) : () -> null);
+        return (ModList.get().isLoaded(modid) ? () -> BuiltInRegistries.BLOCK.get(block) : () -> null);
     }
 
 }
