@@ -2,13 +2,13 @@ package com.davigj.frame_changer.core.data.client;
 
 import com.davigj.frame_changer.core.FrameChanger;
 import com.davigj.frame_changer.core.registry.FCBlocks;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.*;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.Objects;
 
@@ -71,6 +71,6 @@ public class FCBlockStateProvider extends BlockStateProvider {
     }
 
     private String name(Block block) {
-        return Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block)).getPath();
+        return Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(block)).getPath();
     }
 }

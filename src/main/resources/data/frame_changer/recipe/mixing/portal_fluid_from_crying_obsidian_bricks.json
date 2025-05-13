@@ -1,0 +1,32 @@
+{
+  "conditions": [
+    {
+      "modid": "create",
+      "type": "neoforge:mod_loaded"
+    },
+    {
+      "modid": "spelunkery",
+      "type": "neoforge:mod_loaded"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "frame_changer:crying_obsidian_bricks"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    }
+  ],
+  "results": [
+    {
+      "item": "frame_changer:obsidian_bricks"
+    },
+    {
+      "fluid": "spelunkery:portal_fluid",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "heatRequirement": "heated"
+}
