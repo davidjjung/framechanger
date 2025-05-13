@@ -18,5 +18,21 @@
   "block.frame_changer.obsidian_pillar": "Obsidian Pillar",
   "block.frame_changer.crying_obsidian_pillar": "Crying Obsidian Pillar",
   "block.frame_changer.chiseled_obsidian": "Chiseled Obsidian",
-  "block.frame_changer.crying_chiseled_obsidian": "Crying Chiseled Obsidian"
+  "block.frame_changer.crying_chiseled_obsidian": "Crying Chiseled Obsidian",
+
+  "frame_changer.configuration.custom portal frames": "Custom Portal Frames",
+  "frame_changer.configuration.custom exit portals": "Custom Exit Portals",
+  "frame_changer.configuration.portal break changes": "Portal Break Changes",
+
+  "frame_changer.configuration.custom_portal_frames": "Custom Portal Frames",
+  "frame_changer.configuration.portal_frame_tag": "Portal Frame Tag",
+  "frame_changer.configuration.custom_exit_portals": "Custom Exit Portals",
+  "frame_changer.configuration.exit_portal_frame": "Exit Portal Frame",
+  "frame_changer.configuration.portal_break_changes": "Portal Break Changes",
+  "frame_changer.configuration.contagious_misery": "Contagious Misery",
+  "frame_changer.configuration.crying_conversion_chance": "Crying Conversion Chance",
+  "frame_changer.configuration.changes": "Changes",
+  "frame_changer.configuration.crying_obby": "Crying Obsidian",
+  "frame_changer.configuration.weeping_vines": "Weeping Vines",
+  "frame_changer.configuration.ghast_cry": "Ghasts cry"
 }

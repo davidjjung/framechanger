@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "frame_changer:obsidian_bricks"
-  },
-  "result": "frame_changer:obsidian_brick_stairs"
-}
