@@ -5,7 +5,9 @@ import com.davigj.frame_changer.core.registry.FCBlocks;
 import com.teamabnormals.blueprint.core.data.server.BlueprintRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.ItemLike;
@@ -74,28 +76,28 @@ public class FCRecipeProvider extends BlueprintRecipeProvider {
         stonecutterResultFromBase(consumer, FCBlocks.CRYING_OBSIDIAN_BRICK_SLAB.get(), FCBlocks.CRYING_POLISHED_OBSIDIAN.get(), 2);
         stonecutterResultFromBase(consumer, FCBlocks.CRYING_OBSIDIAN_BRICK_STAIRS.get(), FCBlocks.CRYING_POLISHED_OBSIDIAN.get());
         stonecutterResultFromBase(consumer, FCBlocks.CRYING_OBSIDIAN_BRICK_WALL.get(), FCBlocks.CRYING_POLISHED_OBSIDIAN.get());
-        /*
-        ShapedRecipeBuilder.shaped(FCBlocks.OBSIDIAN_PILLAR.get(), 2).define(
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, FCBlocks.OBSIDIAN_PILLAR.get(), 2).define(
                 '#', Blocks.OBSIDIAN).pattern("#").pattern("#")
                 .unlockedBy("has_obsidian_block", has(Blocks.OBSIDIAN)).save(consumer);
-        ShapedRecipeBuilder.shaped(FCBlocks.CRYING_OBSIDIAN_PILLAR.get(), 2).define(
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, FCBlocks.CRYING_OBSIDIAN_PILLAR.get(), 2).define(
                         '#', Blocks.CRYING_OBSIDIAN).pattern("#").pattern("#")
                 .unlockedBy("has_crying_obsidian_block", has(Blocks.CRYING_OBSIDIAN)).save(consumer);
 
-        ShapedRecipeBuilder.shaped(FCBlocks.POLISHED_OBSIDIAN.get(), 4).define('#', Blocks.OBSIDIAN)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, FCBlocks.POLISHED_OBSIDIAN.get(), 4).define('#', Blocks.OBSIDIAN)
                 .pattern("##").pattern("##")
                 .unlockedBy("has_obsidian", has(Blocks.OBSIDIAN)).save(consumer);
-        ShapedRecipeBuilder.shaped(FCBlocks.CRYING_POLISHED_OBSIDIAN.get(), 4).define('#', Blocks.CRYING_OBSIDIAN)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, FCBlocks.CRYING_POLISHED_OBSIDIAN.get(), 4).define('#', Blocks.CRYING_OBSIDIAN)
                 .pattern("##").pattern("##")
                 .unlockedBy("has_crying_obsidian", has(Blocks.CRYING_OBSIDIAN)).save(consumer);
 
-        ShapedRecipeBuilder.shaped(FCBlocks.OBSIDIAN_BRICKS.get(), 4).define('#', FCBlocks.POLISHED_OBSIDIAN.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, FCBlocks.OBSIDIAN_BRICKS.get(), 4).define('#', FCBlocks.POLISHED_OBSIDIAN.get())
                 .pattern("##").pattern("##")
                 .unlockedBy("has_polished_obsidian", has(FCBlocks.POLISHED_OBSIDIAN.get())).save(consumer);
-        ShapedRecipeBuilder.shaped(FCBlocks.CRYING_OBSIDIAN_BRICKS.get(), 4).define('#', FCBlocks.CRYING_POLISHED_OBSIDIAN.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, FCBlocks.CRYING_OBSIDIAN_BRICKS.get(), 4).define('#', FCBlocks.CRYING_POLISHED_OBSIDIAN.get())
                 .pattern("##").pattern("##")
                 .unlockedBy("has_crying_polished_obsidian", has(FCBlocks.CRYING_POLISHED_OBSIDIAN.get())).save(consumer);
-         */
+
         }
 
     public static void stoneCutSlabStairsWall(RecipeOutput consumer, Block parent, Block slab, Block stairs, Block wall) {
