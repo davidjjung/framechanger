@@ -33,7 +33,7 @@ public class FrameChanger {
 
     public FrameChanger(IEventBus bus, ModContainer container) {
 
-        REGISTRY_HELPER.register(bus);
+        FCBlocks.HELPER.register(bus);
 
         if (FMLEnvironment.dist.isClient()) {
             FCBlocks.buildCreativeTabContents();
@@ -43,7 +43,10 @@ public class FrameChanger {
         bus.addListener(this::clientSetup);
         bus.addListener(this::dataSetup);
         container.registerConfig(ModConfig.Type.COMMON, FCConfig.COMMON_SPEC);
-        container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+
+        if (FMLEnvironment.dist.isClient()) {
+            container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        }
     }
 
     @SubscribeEvent
