@@ -3,6 +3,7 @@ package com.davigj.frame_changer.core;
 import com.davigj.frame_changer.core.data.client.FCBlockStateProvider;
 import com.davigj.frame_changer.core.data.server.FCBlockTagsProvider;
 import com.davigj.frame_changer.core.data.server.FCRecipeProvider;
+import com.davigj.frame_changer.core.other.FCClientCompat;
 import com.davigj.frame_changer.core.registry.FCBlocks;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.core.HolderLookup;
@@ -18,7 +19,6 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
@@ -33,11 +33,8 @@ public class FrameChanger {
 
     public FrameChanger(IEventBus bus, ModContainer container) {
 
-        FCBlocks.HELPER.register(bus);
-
-        if (FMLEnvironment.dist.isClient()) {
-            FCBlocks.buildCreativeTabContents();
-        }
+        FCBlocks.BLOCKS.register(bus);
+        FCBlocks.ITEMS.register(bus);
 
         bus.addListener(this::commonSetup);
         bus.addListener(this::clientSetup);
@@ -60,9 +57,7 @@ public class FrameChanger {
 
     @SubscribeEvent
     private void clientSetup(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-
-        });
+        event.enqueueWork(FCClientCompat::register);
     }
 
     @SubscribeEvent
