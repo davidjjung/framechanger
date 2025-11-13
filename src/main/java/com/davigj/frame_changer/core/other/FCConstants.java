@@ -11,21 +11,12 @@ import java.util.Map;
 
 public class FCConstants {
     public static final Map<Block, Block> CHISEL_MAP = new HashMap<>();
-    public static final Map<Block, Block> PORTAL_FLUID_MAP = new HashMap<>();
     public static final boolean spelunkeryCryingPortals;
     public static final boolean spelunkeryPortalFluid;
 
     public static void determineChiselMap() {
         CHISEL_MAP.put(FCBlocks.OBSIDIAN_BRICKS.get(), FCBlocks.CHISELED_OBSIDIAN.get());
         CHISEL_MAP.put(FCBlocks.CRYING_OBSIDIAN_BRICKS.get(), FCBlocks.CRYING_CHISELED_OBSIDIAN.get());
-    }
-
-    // inefficient! awawawa
-    public static void portalFluidMap() {
-        PORTAL_FLUID_MAP.put(FCBlocks.CRYING_OBSIDIAN_BRICKS.get(), FCBlocks.OBSIDIAN_BRICKS.get());
-        PORTAL_FLUID_MAP.put(FCBlocks.CRYING_OBSIDIAN_PILLAR.get(), FCBlocks.OBSIDIAN_PILLAR.get());
-        PORTAL_FLUID_MAP.put(FCBlocks.CRYING_CHISELED_OBSIDIAN.get(), FCBlocks.CHISELED_OBSIDIAN.get());
-        PORTAL_FLUID_MAP.put(FCBlocks.CRYING_POLISHED_OBSIDIAN.get(), FCBlocks.POLISHED_OBSIDIAN.get());
     }
 
     static {

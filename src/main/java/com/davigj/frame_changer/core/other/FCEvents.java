@@ -1,24 +1,13 @@
 package com.davigj.frame_changer.core.other;
 
 import com.davigj.frame_changer.core.FrameChanger;
-import com.ordana.spelunkery.reg.ModItems;
-import com.teamabnormals.blueprint.core.util.BlockUtil;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.ParticleUtils;
-import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-
-import static com.davigj.frame_changer.core.other.FCConstants.PORTAL_FLUID_MAP;
 
 @EventBusSubscriber(modid = FrameChanger.MOD_ID)
 public class FCEvents {
@@ -28,22 +17,9 @@ public class FCEvents {
             return;
         }
         Player player = event.getEntity();
-        ItemStack heldItem = player.getItemInHand(event.getHand());
         BlockState clickedBlockState = player.level().getBlockState(event.getPos());
-        if (PORTAL_FLUID_MAP.containsKey(clickedBlockState.getBlock()) && heldItem.is(Items.GLASS_BOTTLE)) {
-            BlockState convertedState = BlockUtil.transferAllBlockStates(clickedBlockState, PORTAL_FLUID_MAP.get(clickedBlockState.getBlock()).defaultBlockState());
-            player.level().setBlock(event.getPos(), convertedState, 3);
-            player.swing(event.getHand());
-            event.setCancellationResult(InteractionResult.SUCCESS);
-            ItemStack portalFluid = new ItemStack(ModItems.PORTAL_FLUID_BOTTLE.get());
-            player.level().playSound(player, event.getPos(), SoundEvents.RESPAWN_ANCHOR_DEPLETE.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
-            ParticleUtils.spawnParticlesOnBlockFaces(player.level(), event.getPos(), ParticleTypes.FALLING_OBSIDIAN_TEAR, UniformInt.of(3, 5));
-            if (!player.getAbilities().instabuild) {
-                heldItem.shrink(1);
-                if (!player.getInventory().add(portalFluid)) {
-                    player.drop(portalFluid, false);
-                }
-            }
-        }
+        ItemStack heldItem = player.getItemInHand(event.getHand());
+
+        FCDataMapUtil.fluidDrain(player, clickedBlockState, heldItem, event);
     }
 }

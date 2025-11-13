@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": {
+    "frame_changer:crying_obsidian_bricks": {
+      "result": "frame_changer:obsidian_bricks"
+    },
+    "frame_changer:crying_obsidian_pillar": {
+      "result": "frame_changer:obsidian_pillar"
+    },
+    "frame_changer:crying_chiseled_obsidian": {
+      "result": "frame_changer:chiseled_obsidian"
+    },
+    "frame_changer:crying_polished_obsidian": {
+      "result": "frame_changer:polished_obsidian"
+    }
+  }
+}
