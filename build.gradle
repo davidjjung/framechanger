@@ -77,9 +77,9 @@ sourceSets.main.resources {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
-    implementation fg.deobf("com.teamabnormals:blueprint:${project.minecraft}-${project.blueprint}")
 
     compileOnly fg.deobf("maven.modrinth:spelunkery:Pae622FR")
+    compileOnly fg.deobf("maven.modrinth:blueprint:xtEwbO0X")
     compileOnly fg.deobf("maven.modrinth:moonlight:uFOWAGzU")
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.0"))

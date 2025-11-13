@@ -14,7 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -25,7 +24,7 @@ import static com.davigj.frame_changer.core.other.FCConstants.PORTAL_FLUID_MAP;
 public class FCEvents {
     @SubscribeEvent
     public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (!ModList.get().isLoaded("spelunkery")) {
+        if (!ModList.get().isLoaded("spelunkery") || !FCConstants.spelunkeryPortalFluid) {
             return;
         }
         Player player = event.getEntity();
