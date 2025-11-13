@@ -14,6 +14,7 @@ public class FCConstants {
     public static final Map<Block, Block> CHISEL_MAP = new HashMap<>();
     public static final Map<Block, Block> PORTAL_FLUID_MAP = new HashMap<>();
     public static final boolean spelunkeryCryingPortals;
+    public static final boolean spelunkeryPortalFluid;
 
 
     public static void initializeObbyMap() {
@@ -39,5 +40,6 @@ public class FCConstants {
 
     static {
         spelunkeryCryingPortals = ModList.get().isLoaded("spelunkery") ? CommonConfigs.PORTAL_DESTRUCTION_CRYING_OBSIDIAN.get() : false;
+        spelunkeryPortalFluid = ModList.get().isLoaded("spelunkery") ? CommonConfigs.CRYING_OBSIDIAN_PORTAL_FLUID.get() : false;
     }
 }
