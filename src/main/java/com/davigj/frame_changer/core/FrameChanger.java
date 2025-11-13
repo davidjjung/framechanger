@@ -21,10 +21,12 @@ import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import java.util.concurrent.CompletableFuture;
 
 import static com.davigj.frame_changer.core.other.FCConstants.*;
+import static com.davigj.frame_changer.core.other.FCDataMapUtil.CRYING_CONVERTS;
 
 @Mod(FrameChanger.MOD_ID)
 public class FrameChanger {
@@ -39,6 +41,8 @@ public class FrameChanger {
         bus.addListener(this::commonSetup);
         bus.addListener(this::clientSetup);
         bus.addListener(this::dataSetup);
+        bus.addListener(this::registerDataMapTypes);
+
         container.registerConfig(ModConfig.Type.COMMON, FCConfig.COMMON_SPEC);
 
         if (FMLEnvironment.dist.isClient()) {
@@ -49,7 +53,6 @@ public class FrameChanger {
     @SubscribeEvent
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            initializeObbyMap();
             determineChiselMap();
             portalFluidMap();
         });
@@ -75,5 +78,10 @@ public class FrameChanger {
 
         boolean includeClient = event.includeClient();
         generator.addProvider(includeClient, new FCBlockStateProvider(output, helper));
+    }
+
+    @SubscribeEvent
+    private void registerDataMapTypes(RegisterDataMapTypesEvent event) {
+        event.register(CRYING_CONVERTS);
     }
 }

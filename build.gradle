@@ -88,6 +88,7 @@ configurations {
 dependencies {
     implementation("com.teamabnormals:blueprint:$minecraft_version-$blueprint_version")
     compileOnly("maven.modrinth:spelunkery:v6sHcul7")
+    runtimeOnly("maven.modrinth:spelunkery:v6sHcul7")
 
     compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei}")
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei}")

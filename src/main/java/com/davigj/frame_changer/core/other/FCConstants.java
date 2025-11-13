@@ -10,19 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FCConstants {
-    public static final Map<Block, Block> OBBY_MAP = new HashMap<>();
     public static final Map<Block, Block> CHISEL_MAP = new HashMap<>();
     public static final Map<Block, Block> PORTAL_FLUID_MAP = new HashMap<>();
     public static final boolean spelunkeryCryingPortals;
-
-
-    public static void initializeObbyMap() {
-        OBBY_MAP.put(Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN);
-        OBBY_MAP.put(FCBlocks.OBSIDIAN_BRICKS.get(), FCBlocks.CRYING_OBSIDIAN_BRICKS.get());
-        OBBY_MAP.put(FCBlocks.OBSIDIAN_PILLAR.get(), FCBlocks.CRYING_OBSIDIAN_PILLAR.get());
-        OBBY_MAP.put(FCBlocks.CHISELED_OBSIDIAN.get(), FCBlocks.CRYING_CHISELED_OBSIDIAN.get());
-        OBBY_MAP.put(FCBlocks.POLISHED_OBSIDIAN.get(), FCBlocks.CRYING_POLISHED_OBSIDIAN.get());
-    }
+    public static final boolean spelunkeryPortalFluid;
 
     public static void determineChiselMap() {
         CHISEL_MAP.put(FCBlocks.OBSIDIAN_BRICKS.get(), FCBlocks.CHISELED_OBSIDIAN.get());
@@ -39,5 +30,6 @@ public class FCConstants {
 
     static {
         spelunkeryCryingPortals = ModList.get().isLoaded("spelunkery") ? CommonConfigs.PORTAL_DESTRUCTION_CRYING_OBSIDIAN.get() : false;
+        spelunkeryPortalFluid = ModList.get().isLoaded("spelunkery") ? CommonConfigs.CRYING_OBSIDIAN_PORTAL_FLUID.get() : false;
     }
 }
