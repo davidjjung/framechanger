@@ -4,13 +4,11 @@ import com.davigj.frame_changer.core.FrameChanger;
 import com.davigj.frame_changer.core.other.FCBlockTags;
 import com.davigj.frame_changer.core.registry.FCBlocks;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
