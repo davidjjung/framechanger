@@ -5,7 +5,7 @@
       "type": "neoforge:mod_loaded"
     },
     {
-      "modid": "spelunkery",
+      "modid": "dimensional_tears",
       "type": "neoforge:mod_loaded"
     }
   ],
@@ -15,7 +15,7 @@
       "item": "frame_changer:obsidian_bricks"
     },
     {
-      "fluid": "spelunkery:portal_fluid",
+      "fluid": "dimensional_tears:dimensional_tears",
       "amount": 250
     }
   ],
