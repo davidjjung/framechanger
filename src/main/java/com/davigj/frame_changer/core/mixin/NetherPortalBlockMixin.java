@@ -14,15 +14,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static com.davigj.frame_changer.core.other.FCConstants.spelunkeryCryingPortals;
+import static com.davigj.frame_changer.core.other.FCConstants.dimensionalTearsCryingPortals;
 
 @Mixin(NetherPortalBlock.class)
 public class NetherPortalBlockMixin {
     @Inject(method = "updateShape", at = @At("HEAD"))
     private void updateObby(BlockState state, Direction dir, BlockState nextState, LevelAccessor level, BlockPos pos, BlockPos nextPos, CallbackInfoReturnable<BlockState> cir) {
         if (!level.isClientSide()) {
-            if (ModList.get().isLoaded("spelunkery")) {
-                if (spelunkeryCryingPortals) {
+            if (ModList.get().isLoaded("dimensional_tears")) {
+                if (dimensionalTearsCryingPortals <= 0 && level.getRandom().nextDouble() <= dimensionalTearsCryingPortals) {
                     FCDataMapUtil.fluidSpread(state, (Level) level, pos, 0.33D);
                 }
             } else if (FCConfig.COMMON.contagiousMisery.get()) {

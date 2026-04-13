@@ -27,7 +27,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static com.davigj.frame_changer.core.other.FCConstants.*;
 import static com.davigj.frame_changer.core.other.FCDataMapUtil.CRYING_CONVERTS;
-import static com.davigj.frame_changer.core.other.FCDataMapUtil.SPELUNKERY_PORTAL_FLUID_DRAIN_CONVERTS;
+import static com.davigj.frame_changer.core.other.FCDataMapUtil.DIMENSIONAL_TEARS_DIMENSIONAL_TEARS_DRAIN_CONVERTS;
 
 @Mod(FrameChanger.MOD_ID)
 public class FrameChanger {
@@ -83,6 +83,6 @@ public class FrameChanger {
     @SubscribeEvent
     private void registerDataMapTypes(RegisterDataMapTypesEvent event) {
         event.register(CRYING_CONVERTS);
-        event.register(SPELUNKERY_PORTAL_FLUID_DRAIN_CONVERTS);
+        event.register(DIMENSIONAL_TEARS_DIMENSIONAL_TEARS_DRAIN_CONVERTS);
     }
 }
