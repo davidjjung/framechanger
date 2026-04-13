@@ -13,7 +13,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 public class FCEvents {
     @SubscribeEvent
     public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (!ModList.get().isLoaded("spelunkery") || !FCConstants.spelunkeryPortalFluid) {
+        if (!ModList.get().isLoaded("dimensional_tears") || !FCConstants.dimensionalTearsPortalFluid) {
             return;
         }
         Player player = event.getEntity();

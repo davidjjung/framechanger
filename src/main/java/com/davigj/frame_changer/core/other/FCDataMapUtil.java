@@ -3,7 +3,7 @@ package com.davigj.frame_changer.core.other;
 import com.davigj.frame_changer.core.FrameChanger;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.ordana.spelunkery.reg.ModItems;
+import com.ordana.dimensional_tears.reg.ModItems;
 import com.teamabnormals.blueprint.core.util.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,11 +32,10 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.spongepowered.asm.mixin.Unique;
 
 import java.util.function.Supplier;
 
-import static com.davigj.frame_changer.core.other.FCConstants.spelunkeryCryingPortals;
+import static com.davigj.frame_changer.core.other.FCConstants.dimensionalTearsCryingPortals;
 
 public class FCDataMapUtil {
     private final static Logger LOGGER = LogManager.getLogger(FrameChanger.MOD_ID);
@@ -51,8 +50,8 @@ public class FCDataMapUtil {
             ResourceLocation.fromNamespaceAndPath(FrameChanger.MOD_ID, "crying_converts"), Registries.BLOCK, CryingData.CODEC
     ).build();
 
-    public static final DataMapType<Block, CryingData> SPELUNKERY_PORTAL_FLUID_DRAIN_CONVERTS = DataMapType.builder(
-            ResourceLocation.fromNamespaceAndPath(FrameChanger.MOD_ID, "spelunkery_portal_fluid_drain_converts"), Registries.BLOCK, CryingData.CODEC
+    public static final DataMapType<Block, CryingData> DIMENSIONAL_TEARS_DIMENSIONAL_TEARS_DRAIN_CONVERTS = DataMapType.builder(
+            ResourceLocation.fromNamespaceAndPath(FrameChanger.MOD_ID, "dimensional_tears_dimensional_tears_drain_converts"), Registries.BLOCK, CryingData.CODEC
     ).build();
 
     private static Supplier<Block> getConversionBlock(String fullId) {
@@ -86,8 +85,8 @@ public class FCDataMapUtil {
 
             if (data != null && random.nextDouble() < cryChance && !(new PortalShape(level, pos, axis2)).isComplete()) {
                 BlockState convertedState = BlockUtil.transferAllBlockStates(cryState, getConversionBlock(data.result).get().defaultBlockState());
-                if (ModList.get().isLoaded("spelunkery")) {
-                    if (!(spelunkeryCryingPortals && cryState.is(Blocks.OBSIDIAN))) {
+                if (ModList.get().isLoaded("dimensional_tears")) {
+                    if (!(dimensionalTearsCryingPortals <= 0 && level.getRandom().nextDouble() <= dimensionalTearsCryingPortals && cryState.is(Blocks.OBSIDIAN))) {
                         level.setBlock(pos.relative(cryDir), convertedState, 3);
                     }
                 } else {
@@ -99,14 +98,14 @@ public class FCDataMapUtil {
 
     public static void fluidDrain(Player player, BlockState clickedBlockState, ItemStack heldItem, PlayerInteractEvent.RightClickBlock event) {
         Holder<Block> holder = clickedBlockState.getBlockHolder();
-        FCDataMapUtil.CryingData data = holder.getData(SPELUNKERY_PORTAL_FLUID_DRAIN_CONVERTS);
+        FCDataMapUtil.CryingData data = holder.getData(DIMENSIONAL_TEARS_DIMENSIONAL_TEARS_DRAIN_CONVERTS);
 
         if (data != null && heldItem.is(Items.GLASS_BOTTLE)) {
             BlockState convertedState = BlockUtil.transferAllBlockStates(clickedBlockState, getConversionBlock(data.result).get().defaultBlockState());
             player.level().setBlock(event.getPos(), convertedState, 3);
             player.swing(event.getHand());
             event.setCancellationResult(InteractionResult.SUCCESS);
-            ItemStack portalFluid = new ItemStack(ModItems.PORTAL_FLUID_BOTTLE.get());
+            ItemStack portalFluid = new ItemStack(ModItems.DIMENSIONAL_TEARS_BOTTLE.get());
             player.level().playSound(player, event.getPos(), SoundEvents.RESPAWN_ANCHOR_DEPLETE.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
             ParticleUtils.spawnParticlesOnBlockFaces(player.level(), event.getPos(), ParticleTypes.FALLING_OBSIDIAN_TEAR, UniformInt.of(3, 5));
             if (!player.getAbilities().instabuild) {
