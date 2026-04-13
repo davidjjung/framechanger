@@ -22,7 +22,7 @@ public class NetherPortalBlockMixin {
     private void updateObby(BlockState state, Direction dir, BlockState nextState, LevelAccessor level, BlockPos pos, BlockPos nextPos, CallbackInfoReturnable<BlockState> cir) {
         if (!level.isClientSide()) {
             if (DIMENSIONAL_TEARS) {
-                if (dimensionalTearsCryingPortals <= 0 && level.getRandom().nextDouble() <= dimensionalTearsCryingPortals) {
+                if (dimensionalTearsCryingPortals >= 0 && level.getRandom().nextDouble() <= dimensionalTearsCryingPortals) {
                     FCDataMapUtil.fluidSpread(state, (Level) level, pos, 0.33D);
                 }
             } else if (FCConfig.COMMON.contagiousMisery.get()) {

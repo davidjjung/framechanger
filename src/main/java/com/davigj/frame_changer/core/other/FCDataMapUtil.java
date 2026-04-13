@@ -1,6 +1,7 @@
 package com.davigj.frame_changer.core.other;
 
 import com.davigj.frame_changer.core.FrameChanger;
+import com.davigj.frame_changer.core.other.compat.DTCompat;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.ordana.dimensional_tears.reg.ModItems;
@@ -41,18 +42,18 @@ import static com.davigj.frame_changer.core.other.compat.ModConstants.DIMENSIONA
 public class FCDataMapUtil {
     private final static Logger LOGGER = LogManager.getLogger(FrameChanger.MOD_ID);
 
-    public record CryingData(String result) {
-        public static final Codec<CryingData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Codec.STRING.fieldOf("result").forGetter(CryingData::result)
-        ).apply(instance, CryingData::new));
+    public record LinearBlockConvertData(String result) {
+        public static final Codec<LinearBlockConvertData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                Codec.STRING.fieldOf("result").forGetter(LinearBlockConvertData::result)
+        ).apply(instance, LinearBlockConvertData::new));
     }
 
-    public static final DataMapType<Block, CryingData> CRYING_CONVERTS = DataMapType.builder(
-            ResourceLocation.fromNamespaceAndPath(FrameChanger.MOD_ID, "crying_converts"), Registries.BLOCK, CryingData.CODEC
+    public static final DataMapType<Block, LinearBlockConvertData> CRYING_CONVERTS = DataMapType.builder(
+            ResourceLocation.fromNamespaceAndPath(FrameChanger.MOD_ID, "crying_converts"), Registries.BLOCK, LinearBlockConvertData.CODEC
     ).build();
 
-    public static final DataMapType<Block, CryingData> DIMENSIONAL_TEARS_DIMENSIONAL_TEARS_DRAIN_CONVERTS = DataMapType.builder(
-            ResourceLocation.fromNamespaceAndPath(FrameChanger.MOD_ID, "dimensional_tears_dimensional_tears_drain_converts"), Registries.BLOCK, CryingData.CODEC
+    public static final DataMapType<Block, LinearBlockConvertData> DIMENSIONAL_TEARS_DIMENSIONAL_TEARS_DRAIN_CONVERTS = DataMapType.builder(
+            ResourceLocation.fromNamespaceAndPath(FrameChanger.MOD_ID, "dt_drain_converts"), Registries.BLOCK, LinearBlockConvertData.CODEC
     ).build();
 
     private static Supplier<Block> getConversionBlock(String fullId) {
@@ -82,10 +83,11 @@ public class FCDataMapUtil {
         for (Direction cryDir : Direction.values()) {
             BlockState cryState = level.getBlockState(pos.relative(cryDir));
             Holder<Block> holder = cryState.getBlockHolder();
-            FCDataMapUtil.CryingData data = holder.getData(CRYING_CONVERTS);
+            LinearBlockConvertData data = holder.getData(CRYING_CONVERTS);
 
             if (data != null && random.nextDouble() < cryChance && !(new PortalShape(level, pos, axis2)).isComplete()) {
                 BlockState convertedState = BlockUtil.transferAllBlockStates(cryState, getConversionBlock(data.result).get().defaultBlockState());
+                level.playSound(null, pos.relative(cryDir), DTCompat.portalBreak, SoundSource.BLOCKS, 0.75F, 1.0F);
                 if (DIMENSIONAL_TEARS) {
                     if (!(dimensionalTearsCryingPortals <= 0 && level.getRandom().nextDouble() <= dimensionalTearsCryingPortals && cryState.is(Blocks.OBSIDIAN))) {
                         level.setBlock(pos.relative(cryDir), convertedState, 3);
@@ -99,7 +101,7 @@ public class FCDataMapUtil {
 
     public static void fluidDrain(Player player, BlockState clickedBlockState, ItemStack heldItem, PlayerInteractEvent.RightClickBlock event) {
         Holder<Block> holder = clickedBlockState.getBlockHolder();
-        FCDataMapUtil.CryingData data = holder.getData(DIMENSIONAL_TEARS_DIMENSIONAL_TEARS_DRAIN_CONVERTS);
+        LinearBlockConvertData data = holder.getData(DIMENSIONAL_TEARS_DIMENSIONAL_TEARS_DRAIN_CONVERTS);
 
         if (data != null && heldItem.is(Items.GLASS_BOTTLE)) {
             BlockState convertedState = BlockUtil.transferAllBlockStates(clickedBlockState, getConversionBlock(data.result).get().defaultBlockState());
@@ -107,7 +109,7 @@ public class FCDataMapUtil {
             player.swing(event.getHand());
             event.setCancellationResult(InteractionResult.SUCCESS);
             ItemStack portalFluid = new ItemStack(ModItems.DIMENSIONAL_TEARS_BOTTLE.get());
-            player.level().playSound(player, event.getPos(), SoundEvents.RESPAWN_ANCHOR_DEPLETE.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
+            player.level().playSound(player, event.getPos(), DTCompat.bottleFluid, SoundSource.BLOCKS, 1.0f, 1.0f);
             ParticleUtils.spawnParticlesOnBlockFaces(player.level(), event.getPos(), ParticleTypes.FALLING_OBSIDIAN_TEAR, UniformInt.of(3, 5));
             if (!player.getAbilities().instabuild) {
                 heldItem.shrink(1);
