@@ -6,7 +6,6 @@
   "refmap": "frame_changer.refmap.json",
   "mixins": [
     "BaseFireBlockMixin",
-    "HammerAndChiselItemMixin",
     "NetherPortalBlockMixin",
     "PortalForcerMixin",
     "PortalShapeMixin"
