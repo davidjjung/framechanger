@@ -25,7 +25,7 @@ import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.davigj.frame_changer.core.other.FCConstants.*;
+import static com.davigj.frame_changer.core.other.compat.ModConstants.*;
 import static com.davigj.frame_changer.core.other.FCDataMapUtil.CRYING_CONVERTS;
 import static com.davigj.frame_changer.core.other.FCDataMapUtil.DIMENSIONAL_TEARS_DIMENSIONAL_TEARS_DRAIN_CONVERTS;
 

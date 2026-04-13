@@ -25,7 +25,7 @@ import java.util.function.Supplier;
 public class PortalForcerMixin {
     // Bad code, but the best I can make it
     @Unique
-    private final static Logger framechanger$LOGGER = LogManager.getLogger(FrameChanger.MOD_ID);
+    private final static Logger fc$LOGGER = LogManager.getLogger(FrameChanger.MOD_ID);
 
     @Mutable
     @Final
@@ -40,7 +40,7 @@ public class PortalForcerMixin {
     private boolean customExit(ServerLevel instance, BlockPos pos, BlockState state, Operation<Boolean> original, @Local(ordinal = 3) int k3) {
         BlockState blockState = state;
         if (FCConfig.COMMON.customExitPortals.get()) {
-            blockState = k3 < 0 ? framechanger$getCompatBlock(FCConfig.COMMON.exitPortalFrame.get()).get().defaultBlockState() : Blocks.AIR.defaultBlockState();
+            blockState = k3 < 0 ? fc$getCompatBlock(FCConfig.COMMON.exitPortalFrame.get()).get().defaultBlockState() : Blocks.AIR.defaultBlockState();
         }
         return original.call(instance, pos, blockState);
     }
@@ -49,28 +49,28 @@ public class PortalForcerMixin {
     private boolean customExitPt2(ServerLevel instance, BlockPos pos, BlockState state, int i, Operation<Boolean> original) {
         BlockState blockState = state;
         if (FCConfig.COMMON.customExitPortals.get()) {
-            blockState = framechanger$getCompatBlock(FCConfig.COMMON.exitPortalFrame.get()).get().defaultBlockState();
+            blockState = fc$getCompatBlock(FCConfig.COMMON.exitPortalFrame.get()).get().defaultBlockState();
         }
         return original.call(instance, pos, blockState, i);
     }
 
     @Unique
-    private static Supplier<Block> framechanger$getCompatBlock(String fullId) {
+    private static Supplier<Block> fc$getCompatBlock(String fullId) {
         String[] parts = fullId.split(":");
         if (parts.length != 2) {
-            framechanger$LOGGER.warn("Improperly formatted config for generated portal frames. String should be formatted 'modid:blockID'. Defaulting to minecraft:obsidian");
+            fc$LOGGER.warn("Improperly formatted config for generated portal frames. String should be formatted 'modid:blockID'. Defaulting to minecraft:obsidian");
             return () -> Blocks.OBSIDIAN;
         }
         String modid = parts[0];
         String blockID = parts[1];
         if (!ModList.get().isLoaded(modid) && modid != null) {
-            framechanger$LOGGER.warn("Mod '" + modid + "' not loaded, invalid configured exit portal frame blockID. String should be formatted 'modID:blockID'. Defaulting to minecraft:obsidian");
+            fc$LOGGER.warn("Mod '" + modid + "' not loaded, invalid configured exit portal frame blockID. String should be formatted 'modID:blockID'. Defaulting to minecraft:obsidian");
             return () -> Blocks.OBSIDIAN;
         }
         assert modid != null;
         ResourceLocation block = ResourceLocation.fromNamespaceAndPath(modid, blockID);
         if (BuiltInRegistries.BLOCK.get(block) == Blocks.AIR) {
-            framechanger$LOGGER.warn("Invalid configured exit portal frame blockID. String should be formatted 'modID:blockID'. Defaulting to minecraft:obsidian");
+            fc$LOGGER.warn("Invalid configured exit portal frame blockID. String should be formatted 'modID:blockID'. Defaulting to minecraft:obsidian");
             return () -> Blocks.OBSIDIAN;
         }
         return (ModList.get().isLoaded(modid) ? () -> BuiltInRegistries.BLOCK.get(block) : () -> null);

@@ -35,7 +35,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.function.Supplier;
 
-import static com.davigj.frame_changer.core.other.FCConstants.dimensionalTearsCryingPortals;
+import static com.davigj.frame_changer.core.other.compat.DTCompat.dimensionalTearsCryingPortals;
+import static com.davigj.frame_changer.core.other.compat.ModConstants.DIMENSIONAL_TEARS;
 
 public class FCDataMapUtil {
     private final static Logger LOGGER = LogManager.getLogger(FrameChanger.MOD_ID);
@@ -85,7 +86,7 @@ public class FCDataMapUtil {
 
             if (data != null && random.nextDouble() < cryChance && !(new PortalShape(level, pos, axis2)).isComplete()) {
                 BlockState convertedState = BlockUtil.transferAllBlockStates(cryState, getConversionBlock(data.result).get().defaultBlockState());
-                if (ModList.get().isLoaded("dimensional_tears")) {
+                if (DIMENSIONAL_TEARS) {
                     if (!(dimensionalTearsCryingPortals <= 0 && level.getRandom().nextDouble() <= dimensionalTearsCryingPortals && cryState.is(Blocks.OBSIDIAN))) {
                         level.setBlock(pos.relative(cryDir), convertedState, 3);
                     }
