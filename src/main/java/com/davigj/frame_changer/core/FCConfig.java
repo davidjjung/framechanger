@@ -10,11 +10,17 @@ public class FCConfig {
         public final ModConfigSpec.ConfigValue<String> exitPortalFrame;
         public final ModConfigSpec.ConfigValue<Boolean> contagiousMisery;
         public final ModConfigSpec.ConfigValue<Double> convertChance;
+        public final ModConfigSpec.ConfigValue<Boolean> wildShape;
+        public final ModConfigSpec.ConfigValue<Integer> minSize;
+        public final ModConfigSpec.ConfigValue<Integer> maxSize;
 
         Common (ModConfigSpec.Builder builder) {
             builder.push("changes");
             builder.push("custom portal frames").translation("frame_changer.configuration.custom_portal_frames");
             portalFrameTag = builder.comment("Nether portal frames can be made of anything in the blocktag frame_changer:portal_frames").translation("frame_changer.configuration.portal_frame_tag").define("Nether portal frame variety", true);
+            wildShape = builder.comment("Nether portal frame shapes no longer need to be perfectly rectangular").translation("frame_changer.configuration.portal_wild_shape").define("Nether portal wild shape", true);
+            minSize = builder.comment("If wild shapes are enabled, the minimum size of portals (now determined by number of portal blocks that would form)").translation("frame_changer.configuration.portal_min_size").defineInRange("Nether portal min size", 1, 1, 441);
+            maxSize = builder.comment("If wild shapes are enabled, the maximum size of portals (now determined by number of portal blocks that would form)").translation("frame_changer.configuration.portal_max_size").defineInRange("Nether portal max size", 441, 1, 441);
             builder.pop();
             builder.push("custom exit portals").translation("frame_changer.configuration.custom_exit_portals");
             customExitPortals = builder.comment("Entering a portal causes the portal on the other side to be made of a custom block").translation("frame_changer.configuration.custom_exit_portals").define("Custom exit portals", false);
@@ -22,7 +28,7 @@ public class FCConfig {
             builder.pop();
             builder.push("portal break changes").translation("frame_changer.configuration.portal_break_changes");
             contagiousMisery = builder.comment("Breaking a portal causes obsidian blocks in the frame to possibly convert to their crying variants").translation("frame_changer.configuration.contagious_misery").define("Contagious misery", false);
-            convertChance = builder.comment("Chance of broken portals turning obsidian blocks into their crying variants. Takes in a double value.").translation("frame_changer.configuration.crying_conversion_chance").define("Crying conversion chance", 0.33D);
+            convertChance = builder.comment("Chance of broken portals turning obsidian blocks into their crying variants. Takes in a double value.").translation("frame_changer.configuration.crying_conversion_chance").define("Crying conversion chance", 0.25D);
             builder.pop();
             builder.pop();
         }

@@ -4,10 +4,13 @@ import com.davigj.frame_changer.core.FrameChanger;
 import com.davigj.frame_changer.core.other.compat.DTCompat;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+
+import java.util.Objects;
 
 import static com.davigj.frame_changer.core.other.compat.ModConstants.DIMENSIONAL_TEARS;
 
@@ -23,5 +26,10 @@ public class FCEvents {
         ItemStack heldItem = player.getItemInHand(event.getHand());
 
         FCDataMapUtil.fluidDrain(player, clickedBlockState, heldItem, event);
+        BlockState relativeState = player.level().getBlockState(event.getPos().relative(Objects.requireNonNull(event.getFace())));
+
+        if (relativeState.is(Blocks.NETHER_PORTAL) && heldItem.is(DTCompat.dimensionalTears)) {
+            event.setCanceled(true);
+        }
     }
 }
