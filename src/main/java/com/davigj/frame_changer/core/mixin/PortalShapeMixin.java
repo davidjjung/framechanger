@@ -53,19 +53,19 @@ public abstract class PortalShapeMixin {
     @Unique private BlockPos fc$origin;
 
     @Inject(method = "isValid", at = @At("HEAD"), cancellable = true)
-    private void fc$isValid(CallbackInfoReturnable<Boolean> cir) {
+    private void newIsValid(CallbackInfoReturnable<Boolean> cir) {
         if (!FCConfig.COMMON.wildShape.get()) return;
         this.fc$checkArea();
         cir.setReturnValue(fc$valid);
     }
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void fc$initOrigin(LevelAccessor level, BlockPos pos, Direction.Axis axis, CallbackInfo ci) {
+    private void initOrigin(LevelAccessor level, BlockPos pos, Direction.Axis axis, CallbackInfo ci) {
         this.fc$origin = pos;
     }
 
     @Inject(method = "createPortalBlocks", at = @At("HEAD"), cancellable = true)
-    private void fc$createPortal(CallbackInfo ci) {
+    private void newCreatePortal(CallbackInfo ci) {
         if (!FCConfig.COMMON.wildShape.get()) return;
         BlockState portalState = Blocks.NETHER_PORTAL.defaultBlockState().setValue(NetherPortalBlock.AXIS, this.axis);
         for (BlockPos pos : fc$portalPositions) {
@@ -75,8 +75,9 @@ public abstract class PortalShapeMixin {
     }
 
     @Inject(method = "isComplete", at = @At("HEAD"), cancellable = true)
-    private void fc$isComplete(CallbackInfoReturnable<Boolean> cir) {
+    private void newIsComplete(CallbackInfoReturnable<Boolean> cir) {
         if (!FCConfig.COMMON.wildShape.get()) return;
+        this.fc$checkArea();
         cir.setReturnValue(fc$valid && fc$portalPositions.size() == fc$portalBlockCount);
     }
 
