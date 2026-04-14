@@ -4,6 +4,7 @@ import com.davigj.frame_changer.core.FCConfig;
 import com.davigj.frame_changer.core.other.FCBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -124,7 +125,8 @@ public abstract class PortalShapeMixin {
 
     @Unique
     private boolean fc$isValidInterior(BlockState state, BlockPos pos) {
-        return (state.isAir() || state.is(Blocks.FIRE) || state.is(Blocks.NETHER_PORTAL))
-                && !level.isOutsideBuildHeight(pos);
+        boolean inWorld = !level.isOutsideBuildHeight(pos);
+        boolean empty = state.isAir() || state.is(BlockTags.FIRE);
+        return inWorld && (empty || (state.is(Blocks.NETHER_PORTAL) && state.getValue(NetherPortalBlock.AXIS) == this.axis));
     }
 }
