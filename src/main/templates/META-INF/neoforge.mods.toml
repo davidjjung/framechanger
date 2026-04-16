@@ -19,28 +19,28 @@ description = '''
 
 [[dependencies.frame_changer]]
 modId = "minecraft"
-mandatory = true
+type = "required"
 versionRange = "[1.21.1,1.22)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.frame_changer]]
 modId = "neoforge"
-mandatory = true
+type = "required"
 versionRange = "[21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.frame_changer]]
 modId = "blueprint"
-mandatory = true
+type = "required"
 versionRange = "[8.0.0,)"
 ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.frame_changer]]
 modId = "dimensional_tears"
-mandatory = false
+type = "optional"
 versionRange = "[1.21.1-0.2.0,)"
 ordering = "AFTER"
 side = "BOTH"
